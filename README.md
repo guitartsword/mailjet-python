@@ -3,7 +3,7 @@ Use flask to send emails
 
 ## Prerequisites
 Have `git`, `python`, `pip` and `virtualenv` installed. The installation process
-covers download of this project and the installation of `virutalenv`
+covers the download of this project and the installation of `virutalenv`
 
 ## Installation process
 
@@ -13,7 +13,7 @@ covers download of this project and the installation of `virutalenv`
 4. virtualenv venv
 5. pip install -r requirements
 
-Nice now you are ready to run the project
+Nice, now you are ready to run the project
 
 ## Running the project
 
@@ -29,7 +29,8 @@ Wow, that was ez right?
 - GET `/`
   - Hello World sample
 - POST `/send`
-  - sends an email to payload, strucuture:
+  - sends an email with payload as `json/application`,
+  with the following structure:
 ```json
 {
     "From":"",
