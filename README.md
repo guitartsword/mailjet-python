@@ -7,16 +7,30 @@ covers the download of this project and the installation of `virutalenv`
 
 ## Installation process
 
-1. git clone https://github.com/guitartsword/mailjet-python
-2. cd mailjet-python
-3. [sudo] pip install virtualenv
-4. virtualenv venv
-5. pip install -r requirements
+### Linux/OS-X
+```
+git clone https://github.com/guitartsword/mailjet-python
+cd mailjet-python
+[sudo] pip install virtualenv
+virtualenv venv
+. venv/bin/activate
+pip install -r requirements
+```
+### Windows
+```
+git clone https://github.com/guitartsword/mailjet-python
+cd mailjet-python
+[sudo] pip install virtualenv
+virtualenv venv
+. venv/Scripts/activate
+pip install -r requirements
+```
 
 Nice, now you are ready to run the project
 
 ## Running the project
 
+Windows users should use `set` instead of `export`, example: `set FLASK_APP=app.py`
 1. export FLASK_APP=app.py
 2. export PUBLIC_KEY=keyhere
 3. export SECRET_KEY=keyhere
