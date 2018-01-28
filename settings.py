@@ -2,5 +2,5 @@
 
 import os
 
-PUBLIC_KEY = os.environ['PUBLIC_KEY']
-SECRET_KEY = os.environ['SECRET_KEY']
+PUBLIC_KEY = os.environ.get('PUBLIC_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
