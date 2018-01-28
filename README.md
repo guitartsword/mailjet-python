@@ -31,10 +31,12 @@ Nice, now you are ready to run the project
 ## Running the project
 
 Windows users should use `set` instead of `export`, example: `set FLASK_APP=app.py`
-1. export FLASK_APP=app.py
-2. export PUBLIC_KEY=keyhere
-3. export SECRET_KEY=keyhere
-4. flask run
+```
+export FLASK_APP=app.py
+export PUBLIC_KEY=keyhere
+export SECRET_KEY=keyhere
+flask run
+```
 
 Wow, that was ez right?
 
