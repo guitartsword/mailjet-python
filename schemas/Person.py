@@ -1,5 +1,5 @@
 """Person Schema."""
-from marshmallow import Schema, fields, post_dump
+from marshmallow import Schema, fields
 
 class PersonSchema(Schema):
     """Person Schema."""

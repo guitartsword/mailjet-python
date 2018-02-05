@@ -16,9 +16,3 @@ class Mail(Resource):
         result = mailjet.send.create(data=parsed_data)
         logging.info('Mail sent')
         return result.json(), result.status_code
-    @valid_args(MailSchema)
-    def get(self,**kwargs):
-        data, errors = kwargs.get('args')
-        if errors:
-            return errors, 400
-        return data
