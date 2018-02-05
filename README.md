@@ -72,7 +72,7 @@ Wow, that was ez right?
 - POST `/mail`
   - sends an email with payload as `json/application`,
   with the following structure:
-```json
+```
 {
     "from_person":{/*PersonSchema*/},
     "to_person":[/*Array of*/ {/*PersonSchema*/}],
