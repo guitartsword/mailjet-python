@@ -1,3 +1,4 @@
 Flask
 mailjet_rest
 gunicorn
+marshmallow
