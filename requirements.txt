@@ -3,3 +3,4 @@ flask_restful
 mailjet_rest
 gunicorn
 marshmallow
+flask-cors
