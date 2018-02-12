@@ -10,5 +10,5 @@ class MailSchema(Schema):
         fields.Nested(PersonSchema, required=True),
         dump_to='To')
     subject = fields.String(required=True, dump_to='Subject')
-    text = fields.String(required=True, dump_to='TextPart')
-    html = fields.String(required=True, dump_to='HTMLPart')
+    text = fields.String(required=True, dump_to='TextPart', default='no text')
+    html = fields.String(required=True, dump_to='HTMLPart', default='no html')
