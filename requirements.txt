@@ -5,3 +5,4 @@ mailjet_rest
 gunicorn
 marshmallow
 flask-cors
+psycopg2 #postgres
