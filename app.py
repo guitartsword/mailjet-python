@@ -22,3 +22,4 @@ def create_app():
         return 'Hello World!'
     return app
 
+APP = create_app()
