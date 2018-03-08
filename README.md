@@ -56,6 +56,7 @@ export FLASK_APP=app.py
 export FLASK_DEBUG=1 #Enables reload :)
 export PUBLIC_KEY=keyhere
 export SECRET_KEY=keyhere
+export DATABASE_URL=sqlite:///local.db
 flask run
 ```
 
@@ -70,6 +71,7 @@ FLASK_APP=app.py
 FLASK_DEBUG=1
 PUBLIC_KEY=keyhere
 SECRET_KEY=keyhere
+DATABASE_URL=sqlite:///local.db
 ```
 
 - `heroku local` for unix/linux users
