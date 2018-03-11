@@ -2,10 +2,12 @@
 from marshmallow import Schema, fields
 from . import PersonSchema
 
-class NotificationSchema(Schema):
+class NotificationSchema(PersonSchema):
     """Notification Schema."""
     id = fields.Integer(required=True)
-    person = fields.Nested(PersonSchema, required=True)
+    first_name =fields.String()
+    last_name =fields.String()
+    email =fields.Email()
     subject = fields.String()
     html = fields.String()
     text = fields.String()

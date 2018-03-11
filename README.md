@@ -25,7 +25,7 @@ source venv/bin/activate # or
 . venv/bin/activate
 
 # Windows cmd
-./venv/Scripts/activate
+venv/Scripts/activate
 
 # Windows powershell solution 1
 Set-ExecutionPolicy AllSigned 

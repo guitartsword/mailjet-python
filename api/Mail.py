@@ -7,6 +7,7 @@ from tools import valid_args
 from settings import mailjet
 db = SQLAlchemy()
 
+
 class Mail(Resource):
     @valid_args(MailSchema)
     def post(self, **kwargs):
@@ -37,7 +38,8 @@ class Notify(Resource):
         mail_schema = MailSchema()
         parsed_data = {'Messages': [mail_schema.dump(notification).data]}
         result = mailjet.send.create(data=parsed_data)
-        logging.info('Mail sent to %s', notification.email)
+        logging.warn('Mail sent to %s', notification.email)
+        logging.warn('Mail sent to %s', parsed_data)
         return result.json(), result.status_code
 
     @valid_args(NotificationSchema)
@@ -45,13 +47,15 @@ class Notify(Resource):
         data, errors = kwargs.get('args')
         if errors:
             return errors, 400
-        person = data.pop('person')
-        data['first_name'] = person.get('first_name')
-        data['last_name'] = person.get('last_name')
-        data['email'] = person.get('email')
         notification = NotificationConfiguration(**data)
         db.session.add(notification)
         db.session.commit()
+        return data
+
+    def get(self,):
+        notification = NotificationConfiguration.query.get_or_404(0)
+        notification_schema = NotificationSchema()
+        data = notification_schema.dump(notification)
         return data
 
 
