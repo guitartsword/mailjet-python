@@ -13,8 +13,12 @@ def valid_args(Schema):
             if json:
                 marshal_result = schema.load(json)
 
-            req_args = request.args.to_dict()
             if not marshal_result:
+                req_args = request.form.to_dict()
+                marshal_result = schema.load(req_args)
+
+            if not marshal_result:
+                req_args = request.args.to_dict()
                 marshal_result = schema.load(req_args)
 
             if not marshal_result:
