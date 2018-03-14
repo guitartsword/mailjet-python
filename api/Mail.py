@@ -57,7 +57,22 @@ class Notify(Resource):
         notification_schema = NotificationSchema()
         data = notification_schema.dump(notification)
         return data
-
+        
+    @valid_args(NotificationSchema)
+    def patch(self, **kwargs):
+        data, errors = kwargs.get('args')
+        if errors:
+            return errors, 400
+        update = NotificationConfiguration.query.filter_by(id=data['id']).first()
+        update.first_name = data['first_name']
+        update.last_name = data['last_name']
+        update.email = data['email']
+        update.subject = data['subject']
+        update.text = data['text']
+        update.html = data['html']
+        db.session.commit()
+        json = '{"change-done":"OK"}'
+        return json
 
 class NotificationConfiguration(db.Model):
     id = db.Column('notification_id', db.Integer, primary_key=True)
