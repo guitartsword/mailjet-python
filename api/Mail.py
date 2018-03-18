@@ -1,10 +1,14 @@
 """Mail Engine."""
 import logging
+
 from flask_restful import Resource
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import TEXT
+
 from schemas import MailSchema, NotificationSchema, PersonSchema
-from tools import valid_args
 from settings import mailjet
+from tools import valid_args
+
 db = SQLAlchemy()
 
 
@@ -63,16 +67,18 @@ class Notify(Resource):
         data, errors = kwargs.get('args')
         if errors:
             return errors, 400
-        update = NotificationConfiguration.query.filter_by(id=data['id']).first()
-        update.first_name = data['first_name']
-        update.last_name = data['last_name']
-        update.email = data['email']
-        update.subject = data['subject']
-        update.text = data['text']
-        update.html = data['html']
+        notification = NotificationConfiguration.query.get(data['id'])
+        if not notification:
+            return {
+                'message':'configuration not found',
+                'id':data.get('id'),
+                'status':404
+            }, 404
+        notification.update(**data)
         db.session.commit()
-        json = '{"change-done":"OK"}'
-        return json
+        notification_schema = NotificationSchema()
+        jsonData = notification_schema.dump(notification)
+        return jsonData
 
 class NotificationConfiguration(db.Model):
     id = db.Column('notification_id', db.Integer, primary_key=True)
@@ -80,5 +86,9 @@ class NotificationConfiguration(db.Model):
     last_name = db.Column(db.String(100))
     email = db.Column(db.String(50))
     subject = db.Column(db.String(100))
-    html = db.Column(db.String(100))
-    text = db.Column(db.String(100))
+    html = db.Column(TEXT)
+    text = db.Column(TEXT)
+
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
