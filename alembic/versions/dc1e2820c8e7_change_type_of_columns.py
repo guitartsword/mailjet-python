@@ -17,12 +17,12 @@ depends_on = None
 
 
 def upgrade():
-    op.alter_column('notification', sa.Column('html', sa.TEXT))
-    op.alter_column('notification', sa.Column('text', sa.TEXT))
+    op.alter_column('notification_configuration', sa.Column('html', sa.TEXT))
+    op.alter_column('notification_configuration', sa.Column('text', sa.TEXT))
     pass
 
 
 def downgrade():
-    op.alter_column('notification', sa.Column('html', sa.String(100)))
-    op.alter_column('notification', sa.Column('text', sa.String(100)))
+    op.alter_column('notification_configuration', sa.Column('html', sa.String(100)))
+    op.alter_column('notification_configuration', sa.Column('text', sa.String(100)))
     pass
