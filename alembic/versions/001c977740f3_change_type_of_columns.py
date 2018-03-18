@@ -1,6 +1,6 @@
 """change type of columns
 
-Revision ID: dc1e2820c8e7
+Revision ID: 001c977740f3
 Revises: 6648c905e371
 Create Date: 2018-03-18 12:24:32.236262
 
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'dc1e2820c8e7'
+revision = '001c977740f3'
 down_revision = '6648c905e371'
 branch_labels = None
 depends_on = None
