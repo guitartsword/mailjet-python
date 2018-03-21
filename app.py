@@ -10,6 +10,7 @@ from api import api_bp, api_db
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.register_blueprint(api_bp)
     CORS(app)
     api_db.init_app(app)
