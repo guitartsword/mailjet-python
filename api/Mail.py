@@ -35,7 +35,7 @@ class Notify(Resource):
         notification.from_person = {
             'first_name': 'No',
             'last_name': 'Reply',
-            'email': 'guitartsword@gmail.com'
+            'email': 'carlosvinicioguevaracano@gmail.com'
         }
         if not notification.text:
             notification.text = 'no text'
