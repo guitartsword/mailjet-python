@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import TEXT
 
 from schemas import MailSchema, NotificationSchema, PersonSchema
-from settings import mailjet
+from settings import smtp_mail
 from tools import valid_args
 
 db = SQLAlchemy()
@@ -40,11 +40,14 @@ class Notify(Resource):
         if not notification.text:
             notification.text = 'no text'
         mail_schema = MailSchema()
-        parsed_data = {'Messages': [mail_schema.dump(notification).data]}
-        result = mailjet.send.create(data=parsed_data)
-        logging.warn('Mail sent to %s', notification.email)
-        logging.warn('Mail sent to %s', parsed_data)
-        return result.json(), result.status_code
+        result = {}
+        with smtp_mail as mail:
+            result = mail.send(mail_schema.dump(notification).data)
+        # parsed_data = {'Messages': [mail_schema.dump(notification).data]}
+        # result = mailjet.send.create(data=parsed_data)
+        # logging.warn('Mail sent to %s', notification.email)
+        # logging.warn('Mail sent to %s', parsed_data)
+        return notification.email, result.get('status_code', 400)
 
     @valid_args(NotificationSchema)
     def put(self, **kwargs):
