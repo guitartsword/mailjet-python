@@ -1,12 +1,15 @@
 """Mail Engine."""
 import logging
 
+import requests
+
 from flask_restful import Resource
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import TEXT
 
 from schemas import MailSchema, NotificationSchema, PersonSchema
 from settings import smtp_mail
+from settings import mailjet
 from tools import valid_args
 
 db = SQLAlchemy()
@@ -27,6 +30,8 @@ class Mail(Resource):
 class Notify(Resource):
     def post(self):
         notification = NotificationConfiguration.query.get_or_404(0)
+        send_json = NotificationSchema().dump(notification).data
+        requests.post('https://redes-proyecto.herokuapp.com/records', json=send_json)
         notification.to_person = {
             'first_name': notification.first_name,
             'last_name': notification.last_name,
@@ -43,10 +48,6 @@ class Notify(Resource):
         result = {}
         with smtp_mail as mail:
             result = mail.send(mail_schema.dump(notification).data)
-        # parsed_data = {'Messages': [mail_schema.dump(notification).data]}
-        # result = mailjet.send.create(data=parsed_data)
-        # logging.warn('Mail sent to %s', notification.email)
-        # logging.warn('Mail sent to %s', parsed_data)
         return notification.email, result.get('status_code', 400)
 
     @valid_args(NotificationSchema)

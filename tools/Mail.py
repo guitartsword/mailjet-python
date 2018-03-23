@@ -25,7 +25,7 @@ class Mail():
     def close(self):
         self.session.quit()
     def send(self, mail_schema):
-        logging.error("SCHEMA:%s",mail_schema)
+        logging.debug("SCHEMA:%s",mail_schema)
         msg = MIMEMultipart('alternative')
         msg['Subject'] = mail_schema.get('Subject')
         msg['From'] = mail_schema.get('From').get('Email')
