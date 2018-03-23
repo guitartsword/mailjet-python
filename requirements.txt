@@ -6,3 +6,5 @@ gunicorn
 marshmallow
 flask-cors
 psycopg2 #postgres
+requests
+alembic

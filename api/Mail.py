@@ -27,6 +27,7 @@ class Mail(Resource):
 class Notify(Resource):
     def post(self):
         notification = NotificationConfiguration.query.get_or_404(0)
+        #webhook('https://redes-proyecto.herokuapp.com/records', mail_schema)
         notification.to_person = {
             'first_name': notification.first_name,
             'last_name': notification.last_name,
